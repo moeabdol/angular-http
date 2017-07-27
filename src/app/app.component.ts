@@ -60,10 +60,22 @@ export class AppComponent {
 
   doGETAsPromiseError() {
     console.log("GET AS PROMISE ERROR");
+    const url = `${this.apiRoot}/post`;
+    this.http.get(url)
+      .toPromise()
+      .then(
+        res => console.log(res),
+        msg => console.error(`Error: ${msg.status} ${msg.statusText}`)
+      );
   }
 
   doGETAsObservableError() {
     console.log("GET AS OBSERVABLE ERROR");
+    const url = `${this.apiRoot}/post`;
+    this.http.get(url).subscribe(
+      res => console.log(res),
+      msg => console.log(`Error: ${msg.status} ${msg.statusText}`)
+    );
   }
 
   doGETWithHeaders() {
