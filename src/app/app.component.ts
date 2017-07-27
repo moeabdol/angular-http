@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Http, URLSearchParams } from "@angular/http";
+import { Http, URLSearchParams, Headers, RequestOptions } from "@angular/http";
 import "rxjs/add/operator/toPromise";
 
 @Component({
@@ -80,5 +80,14 @@ export class AppComponent {
 
   doGETWithHeaders() {
     console.log("GET WITH HEADERS");
+    const headers = new Headers();
+    headers.append("Authorization", btoa("username:password"));
+    const opts = new RequestOptions();
+    opts.headers = headers;
+    const url = `${this.apiRoot}/get`;
+    this.http.get(url, opts).subscribe(
+      res => console.log(res),
+      msg => console.error(`Error: ${msg.status} ${msg.statusText}`)
+    );
   }
 }
