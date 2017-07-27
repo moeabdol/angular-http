@@ -22,10 +22,22 @@ export class AppComponent {
 
   doPOST() {
     console.log("POST");
+    const url = `${this.apiRoot}/post`;
+    const search = new URLSearchParams();
+    search.set("foo", "moo");
+    search.set("limit", "25");
+    this.http.post(url, {moo: "foo", goo: "loo"}, {search})
+      .subscribe(res => console.log(res));
   }
 
   doPUT() {
     console.log("PUT");
+    const url = `${this.apiRoot}/put`;
+    const search = new URLSearchParams();
+    search.set("foo", "moo");
+    search.set("limit", "25");
+    this.http.put(url, {moo: "foo", goo: "loo"}, {search})
+      .subscribe(res => console.log(res));
   }
 
   doDELETE() {
