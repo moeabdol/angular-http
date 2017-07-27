@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { Http, URLSearchParams } from "@angular/http";
+import "rxjs/add/operator/toPromise";
 
 @Component({
   selector: "app-root",
@@ -51,6 +52,10 @@ export class AppComponent {
 
   doGETAsPromise() {
     console.log("GET AS PROMISE");
+    const url = `${this.apiRoot}/get`;
+    this.http.get(url)
+      .toPromise()
+      .then(res => console.log(res));
   }
 
   doGETAsPromiseError() {
