@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Http, URLSearchParams } from "@angular/http";
 
 @Component({
   selector: "app-root",
@@ -9,10 +9,15 @@ import { HttpClient } from "@angular/common/http";
 export class AppComponent {
   apiRoot: string = "http://httpbin.org";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: Http) { }
 
   doGET() {
     console.log("GET");
+    const url = `${this.apiRoot}/get`;
+    const search = new URLSearchParams();
+    search.set("foo", "moo");
+    search.set("limit", "25");
+    this.http.get(url, {search}).subscribe(res => console.log(res));
   }
 
   doPOST() {
@@ -25,6 +30,11 @@ export class AppComponent {
 
   doDELETE() {
     console.log("DELETE");
+    const url = `${this.apiRoot}/delete`;
+    const search = new URLSearchParams();
+    search.set("foo", "moo");
+    search.set("limit", "25");
+    this.http.delete(url, {search}).subscribe(res => console.log(res));
   }
 
   doGETAsPromise() {
